@@ -1,10 +1,10 @@
 use std::fmt::Debug;
 
-pub trait Unwrapable<T>: Sized {
+pub trait Unwrappable<T>: Sized {
     fn unwrap(s: Self) -> T;
 }
 
-impl<T, E> Unwrapable<T> for Result<T, E>
+impl<T, E> Unwrappable<T> for Result<T, E>
 where
     E: Debug,
 {
@@ -13,7 +13,7 @@ where
     }
 }
 
-impl<T> Unwrapable<T> for Option<T> {
+impl<T> Unwrappable<T> for Option<T> {
     fn unwrap(s: Self) -> T {
         Option::unwrap(s)
     }
