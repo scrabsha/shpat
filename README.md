@@ -31,3 +31,13 @@ The `Apply` trait is implemented for every `Sized` type. It also provides
 object itself (which may be usefull when one wants to insert a value in a hash
 map, but want to keep returned value), and `apply_unwrap`, which will call
 `unwrap` on every `Unwrapable` returned value.
+
+### `Unwrappable`
+
+The `Unwrappable` trait is an attempt to unify the behavior of types which
+represent a success or failure dichotomy, such as `Result` and `Option`. These
+type implement a method which returns the success value, and panics if it was
+a failure. These behaviours are unified with the `unwrap` function.
+
+This trait is implemented for both `Result` and `Option`. It is closely related
+to the `Try` trait from the standard library.
