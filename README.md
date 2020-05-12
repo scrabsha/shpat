@@ -44,3 +44,12 @@ function.
 
 This trait is implemented for both `Result` and `Option`. It is closely
 related to the `Try` trait from the standard library.
+
+## Contributing
+
+Contributions and suggestions are welcome! If you have any comment about the
+features, the code or its documentation, feel free to open an issue so we can
+discuss it.
+
+`shpat` is distributed under the [MIT license](LICENSE.md). Any contribution to
+the codebase is assumed to signal agreement with such license.
