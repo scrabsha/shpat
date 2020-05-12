@@ -8,6 +8,7 @@ description = "sasha's solution to common patterns"
 documentation = "https://docs.rs/shpat"
 readme = "README.md"
 repository = "https://github.com/scileo/shpat"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
