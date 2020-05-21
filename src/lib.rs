@@ -32,6 +32,33 @@
 //! hash map, but want to keep returned value), and `apply_unwrap`, which will
 //! call `unwrap` on every `Unwrapable` returned value.
 //!
+//! ## `quick_drop`
+//!
+//! As shown by [Aaron Abramov](https://github.com/aaronabramov/) in [their
+//! blog post](https://abramov.io/rust-dropping-things-in-another-thread),
+//! `drop`ping large objects can slow down a Rust program. A solution they
+//! suggested is to run the `drop` function in a new thread.
+//!
+//! The `QuickDrop` trait is provided, which allows, for most objects, to
+//! be dropped in a new thread.
+//!
+//! ```rust
+//! use shpat::prelude::*;
+//!
+//! // An object whose drop is likely to take a long time
+//! struct Heavy;
+//!
+//! let heavy = Heavy;
+//!
+//! heavy.quick_drop();
+//! ```
+//!
+//! ### Traits required by `QuickDrop`
+//!
+//! The object on which `quick_drop` is called is moved to a new thread. As
+//! such, it has to be `Send`. Additionaly, as `quick_drop` takes ownership of
+//! it, the object has to be `Sized`.
+//!
 //! ## `Unwrappable`
 //!
 //! The `Unwrappable` trait is an attempt to unify the behavior of types which
@@ -48,6 +75,7 @@
 #![forbid(clippy::missing_errors_doc)]
 
 mod apply;
+mod quick_drop;
 mod unwrappable;
 
 pub mod prelude;
