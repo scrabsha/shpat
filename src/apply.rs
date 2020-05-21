@@ -23,6 +23,34 @@
 //!     .apply(|m| m.insert("hello", "world"))
 //!     .apply(|m| m.insert("animal", "farm"));
 //! ```
+//!
+//! # Performance
+//!
+//! This implementation of `Apply` requires the object to move at each new call
+//! to `apply`. Although this has not been benchmarked, these moves may cause
+//! some slowdown issues on performance-critical operations or if the size of
+//! the `appl`ied structure is big.
+//!
+//! A way to avoid this slowdown is to wrap the structure in a `Box`, call the
+//! needed `apply`, then dereference it. This way, the reference to the object
+//! moves, but not the object itself.
+//!
+//! ```rust
+//! use shpat::prelude::*;
+//!
+//! // A big structure
+//! #[derive(Debug, PartialEq)]
+//! struct BigStruct {
+//!     // A field to demonstrate the use of apply
+//!     counter: usize,
+//!     // Lot of fields, data that should not be moved
+//! }
+//!
+//! let b: BigStruct = *Box::new(BigStruct { counter: 0 })
+//!     .apply(|b| b.counter += 1);
+//!
+//! assert_eq!(b, BigStruct { counter: 1 });
+//! ```
 
 use crate::unwrappable::Unwrappable;
 
